@@ -43,41 +43,47 @@ const ComporessorImage = () => {
   };
 
   return (
-    <CompressorWrapper>
-      {origImageFile ? (
-        <img className="upload-img" src={origImageFile} alt="" />
-      ) : (
-        <img
-          className="upload-img"
-          src="http://via.placeholder.com/300"
-          alt=""
-        />
-      )}
-      <div className="btn-wrapper">
-        <div className="upload-btn">
-          <input type="file" name="upload" onChange={(e) => handle(e)} /> Upload
+    <>
+      <CompressorWrapper>
+        <h2>Compress the Images</h2>
+        <div className="inner-block">
+          {origImageFile ? (
+            <img className="upload-img" src={origImageFile} alt="" />
+          ) : (
+            <img
+              className="upload-img"
+              src="http://via.placeholder.com/300"
+              alt=""
+            />
+          )}
+          <div className="btn-wrapper">
+            <div className="upload-btn">
+              <input type="file" name="upload" onChange={(e) => handle(e)} />{" "}
+              Upload
+            </div>
+            {origImageFile && (
+              <button type="button" onClick={(e) => handleCompressImage(e)}>
+                Compressor Image
+              </button>
+            )}
+            {compressedImage && (
+              <a href={compressedImage} download={fileName}>
+                <button type="button">Download</button>
+              </a>
+            )}
+          </div>
+          {compressedImage ? (
+            <img className="upload-img" src={compressedImage} alt="" />
+          ) : (
+            <img
+              className="upload-img"
+              src="http://via.placeholder.com/300"
+              alt=""
+            />
+          )}
         </div>
-        {origImageFile && (
-          <button type="button" onClick={(e) => handleCompressImage(e)}>
-            Compressor Image
-          </button>
-        )}
-        {compressedImage && (
-          <a href={compressedImage} download={fileName}>
-            <button type="button">Download</button>
-          </a>
-        )}
-      </div>
-      {compressedImage ? (
-        <img className="upload-img" src={compressedImage} alt="" />
-      ) : (
-        <img
-          className="upload-img"
-          src="http://via.placeholder.com/300"
-          alt=""
-        />
-      )}
-    </CompressorWrapper>
+      </CompressorWrapper>
+    </>
   );
 };
 
