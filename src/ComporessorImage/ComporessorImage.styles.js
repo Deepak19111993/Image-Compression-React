@@ -4,7 +4,8 @@ export const CompressorWrapper = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   width: 100%;
-  height: 100vh;
+  padding: 0 15px;
+  /* height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,12 +13,17 @@ export const CompressorWrapper = styled.div`
   @media screen and (max-width: 767px) {
     flex-direction: column;
     height: auto;
-    padding: 40px 0;
+    padding: 40px 15px;
   }
   .inner-block {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 0 100px;
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+      padding: 0 0 50px;
+    }
     .btn-wrapper {
       display: flex;
       flex-direction: column;
@@ -113,6 +119,43 @@ export const CompressorWrapper = styled.div`
     }
     @media screen and (max-width: 767px) {
       margin-bottom: 30px;
+    }
+  }
+  .grid-img {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    img {
+      width: calc(100% / 4 - 4px);
+      @media screen and (max-width: 767px) {
+        width: calc(100% / 3 - 4px);
+      }
+    }
+  }
+  .degree-wrapper {
+    margin-bottom: 50px;
+    input {
+      height: 45px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      max-width: 400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 15px;
+      font-size: 16px;
+      color: #000;
+      display: flex;
+      align-items: center;
+      &::placeholder {
+        font-size: 16px;
+        color: #000;
+      }
+    }
+    .degree-result {
+      text-align: center;
+      font-size: 18px;
+      margin: 20px 0;
     }
   }
 `;

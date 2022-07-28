@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CompressorWrapper } from "./ComporessorImage.styles";
 import imageCompression from "browser-image-compression";
 
@@ -7,6 +7,9 @@ const ComporessorImage = () => {
   const [origImageFile, setOrigImageFile] = useState("");
   const [compressedImage, setCompressedImage] = useState("");
   const [fileName, setFileName] = useState("");
+  const [gitData, setGitData] = useState([]);
+
+  const [celsiusValue, setCelsiusValue] = useState("");
 
   const handle = (e) => {
     const imageFile = e.target.files[0];
@@ -42,6 +45,32 @@ const ComporessorImage = () => {
     });
   };
 
+  useEffect(() => {
+    async function helloDk() {
+      const gitUrl = await fetch("https://api.github.com/users").then((res) =>
+        res.json()
+      );
+      console.log("first", gitUrl);
+      setGitData(gitUrl);
+      // const b = (responce) => response.json(a);
+      // console.log("second", b);
+      // const c = (data) => console.log(data);
+      // console.log(a.data);
+      // return;
+    }
+    helloDk();
+  }, []);
+
+  const handleChange = (e) => {
+    let inputNumber = e.target.value;
+    let cValue = (inputNumber * 9) / 5 + 32;
+    setCelsiusValue(cValue);
+
+    if (inputNumber === "") {
+      setCelsiusValue("");
+    }
+  };
+
   return (
     <>
       <CompressorWrapper>
@@ -58,7 +87,7 @@ const ComporessorImage = () => {
           )}
           <div className="btn-wrapper">
             <div className="upload-btn">
-              <input type="file" name="upload" onChange={(e) => handle(e)} />{" "}
+              <input type="file" name="upload" onChange={(e) => handle(e)} />
               Upload
             </div>
             {origImageFile && (
@@ -81,6 +110,26 @@ const ComporessorImage = () => {
               alt=""
             />
           )}
+        </div>
+
+        <div className="degree-wrapper">
+          <h2>Convert to Fehrenheit to Celsius</h2>
+          <input
+            type="number"
+            placeholder="Convert Fehrenheit to Celsius"
+            onChange={(e) => handleChange(e)}
+          />
+          {celsiusValue && (
+            <div className="degree-result">{`${celsiusValue}°F
+            `}</div>
+          )}
+        </div>
+
+        <h2>Fetch the Git Avatar Images</h2>
+        <div className="grid-img">
+          {gitData.map((item) => (
+            <img src={item.avatar_url} alt="" />
+          ))}
         </div>
       </CompressorWrapper>
     </>
